@@ -6,7 +6,7 @@ export const TRAINER = {
   name: 'Jean Allen',
   brand: 'GenFit OnSite',
   tagline: 'Training where life actually happens.',
-  phone: '(555) 014-7782',
+  phone: '(214) 886-1459',
   email: 'Add Jean’s email',
   service_area: 'East Metro + 20 mi',
 }
