@@ -1,18 +1,19 @@
 // ---------------------------------------------------------------
-// GenFit Fieldhouse — seeded mock data. No backend. Demo only.
+// GenFit OnSite — seeded mock data. No backend. Demo only.
 // ---------------------------------------------------------------
 
 export const TRAINER = {
-  name: 'Jean Mercer',
-  brand: 'GenFit Fieldhouse',
+  name: 'Jean Allen', // formal name — profile / settings / waiver only
+  brand: 'GenFit OnSite',
   tagline: 'Training where life actually happens.',
-  phone: '(555) 014-7782',
-  email: 'jean@genfitfieldhouse.com',
+  positioning: 'In-home personal training for real lives, real homes, real schedules, and real progress.',
+  phone: '(555) 014-7782', // placeholder — replace with Jean's real number
+  email: "Add Jean's email", // placeholder — replace with Jean's real email
   service_area: 'East Metro + 20 mi',
 }
 
 export const packages = [
-  { id: 'pkg_starter', name: 'Field Starter', sessions: 8, price: 600, per: 75, blurb: '8 in-home sessions. Foundation + form.' },
+  { id: 'pkg_starter', name: 'Starter 8', sessions: 8, price: 600, per: 75, blurb: '8 in-home sessions. Foundation + form.' },
   { id: 'pkg_build', name: 'Build Block', sessions: 12, price: 840, per: 70, blurb: '12 sessions. Real strength progression.' },
   { id: 'pkg_pro', name: 'Pro Standing', sessions: 16, price: 1040, per: 65, blurb: '16 sessions + priority scheduling.' },
 ]
@@ -136,8 +137,8 @@ export const clients = [
 ]
 
 export const invoices = [
-  { id: 'inv_1', clientId: 'cl_dev', amount: 600, status: 'unpaid', due: iso(-2), label: 'Field Starter renewal' },
-  { id: 'inv_2', clientId: 'cl_tom', amount: 600, status: 'unpaid', due: iso(1), label: 'Field Starter renewal' },
+  { id: 'inv_1', clientId: 'cl_dev', amount: 600, status: 'unpaid', due: iso(-2), label: 'Starter 8 renewal' },
+  { id: 'inv_2', clientId: 'cl_tom', amount: 600, status: 'unpaid', due: iso(1), label: 'Starter 8 renewal' },
   { id: 'inv_3', clientId: 'cl_maya', amount: 840, status: 'paid', due: iso(-10), label: 'Build Block' },
   { id: 'inv_4', clientId: 'cl_priya', amount: 1040, status: 'paid', due: iso(-5), label: 'Pro Standing' },
 ]
@@ -279,10 +280,13 @@ export const WEEK_THEMES = {
   Sunday: 'Reset / planning',
 }
 
-export const TIKTOK = { handle: '@jeanfieldhouse', url: 'https://www.tiktok.com/@jeanfieldhouse' }
+// Social handles are not set yet. Leave `url` empty so the UI renders an
+// editable placeholder instead of pointing at a fake/irrelevant profile.
+// Drop in Jean's real handles + URLs when they're provided.
+export const TIKTOK = { handle: '@add_jeans_tiktok', url: '' }
 export const SOCIAL_LINKS = {
-  tiktok: 'https://www.tiktok.com/@jeanfieldhouse',
-  instagram: 'https://www.instagram.com/jeanfieldhouse',
-  facebook: 'https://www.facebook.com/jeanfieldhouse',
-  youtube: 'https://www.youtube.com/@jeanfieldhouse',
+  tiktok: { label: "Add Jean's TikTok", url: '' },
+  instagram: { label: "Add Jean's Instagram", url: '' },
+  facebook: { label: "Add Jean's Facebook", url: '' },
+  youtube: { label: 'YouTube Shorts (optional)', url: '' },
 }

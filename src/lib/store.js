@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { seed } from '../data/seed.js'
 
-const KEY = 'genfit_fieldhouse_v2'
+const KEY = 'genfit_onsite_v1'
 
 export function loadState() {
   try {
@@ -46,7 +46,7 @@ export function exportJSON(state) {
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.href = url
-  a.download = `genfit-fieldhouse-${new Date().toISOString().slice(0, 10)}.json`
+  a.download = `genfit-onsite-${new Date().toISOString().slice(0, 10)}.json`
   a.click()
   URL.revokeObjectURL(url)
 }

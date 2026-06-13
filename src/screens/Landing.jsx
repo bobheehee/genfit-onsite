@@ -2,10 +2,10 @@ import React from 'react'
 import { TRAINER, packages, SAFETY_LINE, SOCIAL_LINKS, TIKTOK } from '../data/seed.js'
 
 const SOCIALS = [
-  ['TikTok', SOCIAL_LINKS.tiktok, '♪'],
-  ['Instagram', SOCIAL_LINKS.instagram, '◎'],
-  ['Facebook', SOCIAL_LINKS.facebook, 'f'],
-  ['YouTube', SOCIAL_LINKS.youtube, '▶'],
+  [SOCIAL_LINKS.tiktok.label, SOCIAL_LINKS.tiktok.url, '♪'],
+  [SOCIAL_LINKS.instagram.label, SOCIAL_LINKS.instagram.url, '◎'],
+  [SOCIAL_LINKS.facebook.label, SOCIAL_LINKS.facebook.url, 'f'],
+  [SOCIAL_LINKS.youtube.label, SOCIAL_LINKS.youtube.url, '▶'],
 ]
 
 const CLIPS = [
@@ -23,20 +23,21 @@ export default function Landing({ go }) {
     <div className="animate-in">
       {/* top bar */}
       <div className="flex items-center justify-between px-5 pt-5">
-        <span className="display text-[16px] tracking-tight">GENFIT<span style={{ color: 'var(--accent)' }}>.</span>FIELDHOUSE</span>
+        <span className="display text-[16px] tracking-tight">GENFIT<span style={{ color: 'var(--accent)' }}>.</span>ONSITE</span>
         <button className="btn btn-line py-2 px-3 text-[12px]" onClick={() => go('dashboard')}>Trainer login</button>
       </div>
 
       {/* HERO — the thesis */}
       <Section className="pt-10 pb-6">
-        <div className="eyebrow mb-4">In-home personal training</div>
+        <div className="eyebrow mb-4">Train with Jean · In-home personal training</div>
         <h1 className="display text-[44px] leading-[0.92]">
           Training<br />where life<br />
           <span style={{ color: 'var(--accent)' }}>actually</span><br />happens.
         </h1>
         <p className="mt-5 text-[15px] leading-relaxed" style={{ color: 'var(--ink-dim)' }}>
-          No gym? No problem. Jean brings the plan, the pressure, and the progress to your
-          house, garage, apartment gym, office, or wherever you’re ready to work.
+          In-home personal training for real lives, real homes, real schedules, and real
+          progress. No gym? No problem. Jean brings the plan, the pressure, and the progress
+          to your house, garage, apartment gym, office, or wherever you’re ready to work.
         </p>
         <button className="btn btn-primary w-full mt-6 text-[16px]" onClick={() => go('intake')}>
           Apply to train →
@@ -48,11 +49,17 @@ export default function Landing({ go }) {
         </div>
         <div className="flex items-center gap-2 mt-5">
           <span className="eyebrow" style={{ color: 'var(--ink-faint)' }}>Follow</span>
-          {SOCIALS.map(([name, url, icon]) => (
-            <a key={name} href={url} target="_blank" rel="noreferrer" aria-label={name}
-              className="w-9 h-9 rounded-full flex items-center justify-center text-[14px]"
-              style={{ border: '1px solid var(--line)', color: 'var(--ink)' }}>{icon}</a>
-          ))}
+          {SOCIALS.map(([name, url, icon]) =>
+            url ? (
+              <a key={name} href={url} target="_blank" rel="noreferrer" aria-label={name}
+                className="w-9 h-9 rounded-full flex items-center justify-center text-[14px]"
+                style={{ border: '1px solid var(--line)', color: 'var(--ink)' }}>{icon}</a>
+            ) : (
+              <button key={name} type="button" disabled aria-label={name} title={name}
+                className="w-9 h-9 rounded-full flex items-center justify-center text-[14px] opacity-40 cursor-not-allowed"
+                style={{ border: '1px dashed var(--line)', color: 'var(--ink-faint)' }}>{icon}</button>
+            )
+          )}
         </div>
       </Section>
 
@@ -60,7 +67,11 @@ export default function Landing({ go }) {
       <Section>
         <div className="flex items-center justify-between mb-4">
           <h2 className="display text-[24px]">Watch Jean work</h2>
-          <a href={TIKTOK.url} target="_blank" rel="noreferrer" className="eyebrow" style={{ color: 'var(--accent)' }}>{TIKTOK.handle}</a>
+          {TIKTOK.url ? (
+            <a href={TIKTOK.url} target="_blank" rel="noreferrer" className="eyebrow" style={{ color: 'var(--accent)' }}>{TIKTOK.handle}</a>
+          ) : (
+            <span className="eyebrow" style={{ color: 'var(--ink-faint)' }} title="Add Jean's TikTok">{TIKTOK.handle}</span>
+          )}
         </div>
         <div className="grid grid-cols-3 gap-3">
           {CLIPS.map(([title, sub, views]) => (

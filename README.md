@@ -1,6 +1,8 @@
-# GenFit Fieldhouse
+# GenFit OnSite
 
-Mobile-first field operating system for an independent in-home personal trainer (Jean).
+Train with Jean — in-home personal training for real lives, real homes, real schedules,
+and real progress. Mobile-first operating system for an independent in-home personal
+trainer (Jean).
 React + Vite + Tailwind. All data persists locally via localStorage. No backend, no auth,
 no payments, no real third-party APIs. Seeded demo data on first run.
 

@@ -22,7 +22,9 @@ export function ConsentBadge({ level = 'none', size = 'md' }) {
 
 // ---------- TikTok profile card ----------
 export function TikTokProfileCard({ handle, url, onToast }) {
+  const hasUrl = Boolean(url)
   const copy = () => {
+    if (!hasUrl) { onToast?.('Add Jean\'s TikTok link first'); return }
     navigator.clipboard?.writeText(url).then(() => onToast?.('Profile link copied'))
   }
   return (
@@ -33,7 +35,9 @@ export function TikTokProfileCard({ handle, url, onToast }) {
         </div>
         <div className="min-w-0">
           <div className="display text-[18px] truncate">{handle}</div>
-          <div className="text-[12px] truncate" style={{ color: 'var(--ink-faint)' }}>{url.replace('https://www.', '')}</div>
+          <div className="text-[12px] truncate" style={{ color: 'var(--ink-faint)' }}>
+            {hasUrl ? url.replace('https://www.', '') : 'Add Jean’s TikTok link'}
+          </div>
         </div>
       </div>
       {/* embed placeholder */}
@@ -44,7 +48,11 @@ export function TikTokProfileCard({ handle, url, onToast }) {
         </div>
       </div>
       <div className="grid grid-cols-2 gap-2 mt-4">
-        <a className="btn btn-primary text-[13px]" href={url} target="_blank" rel="noreferrer">Open profile</a>
+        {hasUrl ? (
+          <a className="btn btn-primary text-[13px]" href={url} target="_blank" rel="noreferrer">Open profile</a>
+        ) : (
+          <button className="btn btn-line text-[13px] opacity-50 cursor-not-allowed" disabled title="Add Jean's TikTok">Add link</button>
+        )}
         <button className="btn btn-line text-[13px]" onClick={copy}>Copy link</button>
       </div>
     </div>

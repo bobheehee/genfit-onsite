@@ -11,7 +11,9 @@ export default function SocialStudio({ state, update, go, toast }) {
   const [tab, setTab] = React.useState('Profile')
   return (
     <div>
-      <Header sub="Social studio" title="Social studio" right={<a className="eyebrow" style={{ color: 'var(--accent)' }} href={TIKTOK.url} target="_blank" rel="noreferrer">{TIKTOK.handle}</a>} />
+      <Header sub="Social studio" title="Social studio" right={TIKTOK.url
+        ? <a className="eyebrow" style={{ color: 'var(--accent)' }} href={TIKTOK.url} target="_blank" rel="noreferrer">{TIKTOK.handle}</a>
+        : <span className="eyebrow" style={{ color: 'var(--ink-faint)' }} title="Add Jean's TikTok">{TIKTOK.handle}</span>} />
       <div className="px-5">
         <div className="flex gap-2 overflow-x-auto no-bar pb-1 -mx-1 px-1">
           {TABS.map((t) => <button key={t} className="chip py-2.5 shrink-0" data-on={tab === t} onClick={() => setTab(t)}>{t}</button>)}

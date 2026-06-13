@@ -52,11 +52,12 @@ const CTAS = [
   'Want this at your place? Apply at the link.',
   'In-home training, your space, your schedule. Link in bio.',
   'Tap the link to claim a spot. Schedule stays small on purpose.',
-  'DM the word FIELDHOUSE to start.',
+  'DM the word ONSITE to start.',
+  'Message Jean to start.',
 ]
 
 const HASHTAGS = {
-  base: ['#inhometraining', '#personaltrainer', '#fieldhouse', '#trainingwherelifehappens'],
+  base: ['#inhometraining', '#personaltrainer', '#onsitetraining', '#trainingwherelifehappens'],
   funny: ['#gymtok', '#fitnesshumor', '#noexcuses'],
   'tough love': ['#disciplineovermotivation', '#showup', '#consistency'],
   educational: ['#formtips', '#trainsmart', '#movementtips'],
