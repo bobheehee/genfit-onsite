@@ -1,5 +1,6 @@
 import React from 'react'
 import { TRAINER, packages, SAFETY_LINE, SOCIAL_LINKS, TIKTOK } from '../data/seed.js'
+import { FLOURISHES } from '../lib/voice.js'
 
 const SOCIALS = [
   [SOCIAL_LINKS.tiktok.label, SOCIAL_LINKS.tiktok.url, '♪'],
@@ -47,6 +48,7 @@ export default function Landing({ go }) {
             <span key={t} className="chip" data-on="false">{t}</span>
           ))}
         </div>
+        <p className="mt-4 display text-[15px]" style={{ color: 'var(--accent)' }}>{FLOURISHES.houseIsGym} {FLOURISHES.stillCounts}</p>
         <div className="flex items-center gap-2 mt-5">
           <span className="eyebrow" style={{ color: 'var(--ink-faint)' }}>Follow</span>
           {SOCIALS.map(([name, url, icon]) =>

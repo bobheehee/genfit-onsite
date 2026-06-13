@@ -88,6 +88,19 @@ export const clients = [
     lastNotes: 'Cleaned up squat depth. Shoulder felt good at incline press.',
     nextFocus: 'Add load to RDL, test 3x8 floor press.', programId: 'tpl_garage',
     started: '2025-03-11', age: 34, birthday: '06-20',
+    clientRead: 'Strong but scared to look strong.',
+    realWorld: {
+      parking: 'Visitor spots level P1, badge at gate',
+      pets: 'None',
+      gateCode: 'Gate code sometimes fails, text before arrival',
+      flooring: 'Rubber gym floor, solid footing',
+      spaceLimits: 'Half-court apartment gym — plenty of room',
+      equipment: 'Dumbbells, bands, a couple of machines',
+      patterns: 'Downplays how strong she actually is',
+      motivates: 'Hitting a number she didn’t think she could',
+      dontSay: 'Don’t call it “toning.”',
+      tone: 'Direct. Hype the PRs, name the progress.',
+    },
   },
   {
     id: 'cl_dev', name: 'Devon Hart', status: 'yellow', goal: 'Fat loss + energy',
@@ -97,6 +110,19 @@ export const clients = [
     lastNotes: 'Skipped last week — work travel. Back felt tight on swings.',
     nextFocus: 'Hinge drills, keep swings light, rebuild momentum.', programId: 'tpl_fatloss',
     started: '2025-01-08', age: 41, birthday: '02-14',
+    clientRead: 'Says yes too fast. Confirm understanding.',
+    realWorld: {
+      parking: 'Driveway, leave room for trash day Tue',
+      pets: 'Big friendly lab — Rex, will supervise',
+      gateCode: '—',
+      flooring: 'Concrete, hard on the knees — use the mat',
+      spaceLimits: 'One car bay cleared out',
+      equipment: 'Garage setup, two dumbbells, one skeptical dog',
+      patterns: 'Cancels the moment work travel hits',
+      motivates: 'Having energy left for his kids',
+      dontSay: 'Don’t pile on after a missed week.',
+      tone: 'Encouragement first, pressure second.',
+    },
   },
   {
     id: 'cl_priya', name: 'Priya Raman', status: 'green', goal: 'Stay strong, busy schedule',
@@ -106,6 +132,19 @@ export const clients = [
     lastNotes: 'Crushed the 30-min density block. Wants more conditioning.',
     nextFocus: 'Layer in KB swings, push plank to 45s.', programId: 'tpl_busy30',
     started: '2024-11-02', age: 38, birthday: '09-30',
+    clientRead: 'Needs a plan that survives chaos.',
+    realWorld: {
+      parking: 'Garage level 2, validate at desk',
+      pets: 'None',
+      gateCode: 'Badge in at the security desk',
+      flooring: 'Carpet tile, fine for everything',
+      spaceLimits: 'Small office — clear a 6ft lane',
+      equipment: 'Bands and bodyweight only',
+      patterns: 'Squeezes sessions between back-to-back meetings',
+      motivates: 'Staying sharp under a packed schedule',
+      dontSay: 'Don’t guilt-trip her about time.',
+      tone: 'Efficient. Respect the clock, no filler.',
+    },
   },
   {
     id: 'cl_tom', name: 'Tom Becker', status: 'red', goal: 'Move better, lose stiffness',
@@ -115,6 +154,19 @@ export const clients = [
     lastNotes: 'Knee flared on step-ups. Switched to box squats, felt better.',
     nextFocus: 'Knee-safe day. Mobility heavy. Check in on pain levels.', programId: 'tpl_mobility',
     started: '2025-04-22', age: 57, birthday: '07-12',
+    clientRead: 'Will joke when uncomfortable.',
+    realWorld: {
+      parking: 'Street, 2hr limit — move the car at :50',
+      pets: 'Cat hides the whole session',
+      gateCode: '—',
+      flooring: 'Hardwood, slippery in socks — shoes on',
+      spaceLimits: 'Living room, move the coffee table first',
+      equipment: 'Bodyweight only right now',
+      patterns: 'Talks down his own progress, deflects with jokes',
+      motivates: 'Moving through the day without stiffness',
+      dontSay: 'Don’t tell him to push through knee pain.',
+      tone: 'Patient and joint-smart. Take the wins seriously.',
+    },
   },
   {
     id: 'cl_sara', name: 'Sara Lindqvist', status: 'green', goal: 'Postpartum rebuild',
@@ -124,6 +176,20 @@ export const clients = [
     lastNotes: 'Dead bugs solid. Ready to progress glute bridges to single-leg.',
     nextFocus: 'Single-leg bridge, light goblet squats.', programId: 'tpl_reset',
     started: '2025-05-15', age: 32, birthday: '06-15',
+    clientRead: 'Needs encouragement first, pressure second.',
+    milestone: 'First full push-up',
+    realWorld: {
+      parking: 'Guest pass from the front desk',
+      pets: 'None',
+      gateCode: 'Front desk buzzes you up',
+      flooring: 'Apartment gym mats',
+      spaceLimits: 'Shared gym — off-peak hours only',
+      equipment: 'Dumbbells, bands, machines',
+      patterns: 'Up half the night with the baby and still shows up',
+      motivates: 'Rebuilding strength on her own terms',
+      dontSay: 'Don’t mention “bouncing back.”',
+      tone: 'Gentle. Celebrate the small wins out loud.',
+    },
   },
   {
     id: 'cl_marcus', name: 'Marcus Reed', status: 'yellow', goal: 'Teen athlete — basketball',
@@ -133,6 +199,19 @@ export const clients = [
     lastNotes: 'Coordination improving. Rushes reps — cue tempo.',
     nextFocus: 'Tempo squats, landing mechanics.', programId: 'tpl_teen',
     started: '2025-05-30', age: 15, birthday: '11-03',
+    clientRead: 'Rushes to prove himself — slow him down.',
+    realWorld: {
+      parking: 'North lot by the pavilion',
+      pets: 'On-leash zone, dogs everywhere',
+      gateCode: '—',
+      flooring: 'Grass and park path — weather-dependent',
+      spaceLimits: 'Open park, no shelter if it rains',
+      equipment: 'Bodyweight and bands',
+      patterns: 'Rushes reps to look cool in front of peers',
+      motivates: 'Making the basketball team',
+      dontSay: 'Don’t baby him in front of his friends.',
+      tone: 'Coach-like. Cue tempo, keep it about the work.',
+    },
   },
 ]
 
@@ -183,15 +262,17 @@ export function seed() {
     contentNotes: consentByClient[c.id]?.contentNotes || '',
   }))
   return {
-    version: 7,
+    version: 8,
     clients: clientsWithConsent,
     sessions, programs: programTemplates, exercises, checkins,
     invoices, packages, locations, waivers, messages, progressEntries,
     // social + consent layer
     consentRecords, testimonials, contentIdeas, socialPosts, videoShotLists,
     calendar: {}, // weekday -> [ideaId]
+    // personality layer
+    reminders, personalDates,
     completedSessions: [], editedPrograms: {}, intakeSubmissions: [],
-    settings: { theme: 'volt' },
+    settings: { theme: 'volt', jeanMode: false },
   }
 }
 
@@ -240,7 +321,16 @@ export const testimonials = [
 ]
 
 // Tone library powers the Content Idea Generator + Caption Builder.
-export const TONES = ['funny', 'tough love', 'educational', 'inspirational', 'myth-busting', 'behind-the-scenes']
+export const TONES = ['funny', 'tough love', 'educational', 'inspirational', 'myth-busting', 'behind-the-scenes', 'real talk']
+
+// Personal-feeling reminders + dates that surface on the dashboard.
+// Subtle on purpose — keep it human, never biographical or creepy.
+export const reminders = [
+  { id: 'rem_victoria', text: 'Text Victoria: proud of you.', done: false },
+]
+export const personalDates = [
+  { id: 'pd_victoria', label: 'Victoria graduation week', when: 'This week' },
+]
 
 export const contentIdeas = [
   { id: 'idea_1', title: '3 things you can do with one dumbbell and a hallway', tone: 'educational', day: 'Monday', status: 'scheduled', hook: 'You do not need a gym. You need a hallway.', createdAt: _iso(-3) },
@@ -248,6 +338,11 @@ export const contentIdeas = [
   { id: 'idea_3', title: 'The couch is not the enemy, it is equipment', tone: 'funny', day: 'Saturday', status: 'idea', hook: 'Your couch is a split squat waiting to happen.', createdAt: _iso(-1) },
   { id: 'idea_4', title: 'Stop waiting for the perfect gym', tone: 'tough love', day: 'Thursday', status: 'posted', hook: 'The perfect gym is the one you actually show up to.', createdAt: _iso(-7) },
   { id: 'idea_5', title: 'What in-home training actually looks like', tone: 'behind-the-scenes', day: 'Wednesday', status: 'idea', hook: 'No mirrors, no waiting for a rack. Just work.', createdAt: _iso(-1) },
+  { id: 'idea_6', title: 'The living room workout that beat their gym membership', tone: 'real talk', day: '', status: 'idea', hook: 'A workout at home still counts. Especially when life is loud.', createdAt: _iso(-1) },
+  { id: 'idea_7', title: 'Stop waiting for perfect conditions', tone: 'tough love', day: '', status: 'idea', hook: 'The perfect gym is the one you actually show up to.', createdAt: _iso(-1) },
+  { id: 'idea_8', title: 'One hallway, one dumbbell, no excuses', tone: 'educational', day: '', status: 'idea', hook: 'You do not need a gym. You need a hallway.', createdAt: _iso(-1) },
+  { id: 'idea_9', title: 'What in-home training really looks like', tone: 'behind-the-scenes', day: '', status: 'idea', hook: 'No production crew. Just a real session in a real house.', createdAt: _iso(-1) },
+  { id: 'idea_10', title: 'The client said they had no space. Jean found space.', tone: 'inspirational', day: '', status: 'idea', hook: 'Strength is built where you already are.', createdAt: _iso(-1) },
 ]
 
 export const socialPosts = [

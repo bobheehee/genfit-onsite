@@ -1,10 +1,12 @@
 import React from 'react'
 import { Header, StatCard, ClientCard, StatusPill, Segmented } from '../components/ui.jsx'
 import { fmtTime, isToday } from '../lib/store.js'
+import { voice, JEAN_RULES, CLOSE_THE_LOOP, FLOURISHES } from '../lib/voice.js'
 
-export default function Dashboard({ state, go }) {
+export default function Dashboard({ state, go, update, toast }) {
   const [filter, setFilter] = React.useState('all')
   const { clients, invoices, locations } = state
+  const v = voice(state.settings?.jeanMode)
 
   const todays = clients
     .filter((c) => isToday(c.nextSessionAt))
@@ -61,15 +63,38 @@ export default function Dashboard({ state, go }) {
           <StatCard label="Sessions today" value={todays.length} accent />
           <StatCard label="Active clients" value={clients.length} />
           <StatCard label="Unpaid" value={`$${unpaidTotal}`} hint={`${unpaidCount} invoice${unpaidCount === 1 ? '' : 's'}`} />
-          <StatCard label="Missed check-ins" value={missed.length} hint={missed.length ? 'Follow up' : 'All current'} />
+          <StatCard label={v.missedCheckIns} value={missed.length} hint={missed.length ? 'Follow up' : 'All current'} />
         </div>
+
+        {/* on your radar — personal markers + reminders */}
+        {((state.personalDates || []).length > 0 || (state.reminders || []).length > 0) && (
+          <div className="card p-4">
+            <div className="eyebrow mb-3">On your radar</div>
+            {(state.personalDates || []).map((d) => (
+              <div key={d.id} className="flex items-center justify-between py-1">
+                <span className="text-[13px]" style={{ color: 'var(--ink)' }}>{d.label}</span>
+                <span className="eyebrow" style={{ color: 'var(--accent)' }}>{d.when}</span>
+              </div>
+            ))}
+            {(state.reminders || []).map((r) => (
+              <button key={r.id} onClick={() => {
+                update?.((s) => ({ ...s, reminders: (s.reminders || []).map((x) => x.id === r.id ? { ...x, done: !x.done } : x) }))
+                toast?.(r.done ? 'Back on the list.' : 'Done. Nice.')
+              }} className="w-full flex items-center gap-2 py-1.5 text-left">
+                <span className="w-4 h-4 rounded-md grid place-items-center shrink-0 text-[11px]"
+                  style={{ border: '1px solid var(--line)', background: r.done ? 'var(--accent)' : 'transparent', color: 'var(--accent-ink)' }}>{r.done ? '✓' : ''}</span>
+                <span className="text-[13px]" style={{ color: r.done ? 'var(--ink-faint)' : 'var(--ink)', textDecoration: r.done ? 'line-through' : 'none' }}>{r.text}</span>
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* today's sessions */}
         <div>
-          <div className="eyebrow mb-3">Today’s sessions</div>
+          <div className="eyebrow mb-3">{v.todaysSessions}</div>
           {todays.length === 0 ? (
             <div className="card p-5 text-center text-[13px]" style={{ color: 'var(--ink-faint)' }}>
-              No sessions today. Block out a build day.
+              {v.noSessions}
             </div>
           ) : (
             <div className="space-y-2">
@@ -95,7 +120,7 @@ export default function Dashboard({ state, go }) {
         {/* attention */}
         {needAttention.length > 0 && (
           <div>
-            <div className="eyebrow mb-3">Clients needing attention</div>
+            <div className="eyebrow mb-3">{v.needAttention}</div>
             <div className="space-y-2">
               {needAttention.map((c) => (
                 <ClientCard key={c.id} client={c} location={locOf(c.locationId)} onClick={() => go('client', { id: c.id })} />
@@ -148,6 +173,20 @@ export default function Dashboard({ state, go }) {
           </p>
         </div>
 
+        {/* Jean's Rules */}
+        <div className="card p-5" style={{ background: 'var(--surface-2)' }}>
+          <div className="eyebrow mb-3" style={{ color: 'var(--accent)' }}>Jean’s rules</div>
+          <ol className="space-y-2.5">
+            {JEAN_RULES.map((rule, i) => (
+              <li key={i} className="flex gap-3 items-baseline">
+                <span className="stat-num text-[15px] shrink-0" style={{ color: 'var(--accent)' }}>{i + 1}</span>
+                <span className="text-[14px] font-semibold" style={{ color: 'var(--ink)' }}>{rule}</span>
+              </li>
+            ))}
+          </ol>
+          <p className="text-[11px] mt-4" style={{ color: 'var(--ink-faint)' }}>{FLOURISHES.meetThem}</p>
+        </div>
+
         {/* roster */}
         <div>
           <div className="flex items-center justify-between mb-3">
@@ -165,7 +204,38 @@ export default function Dashboard({ state, go }) {
             ))}
           </div>
         </div>
+
+        {/* end of day */}
+        <CloseTheLoop toast={toast} />
       </div>
+    </div>
+  )
+}
+
+// End-of-day checklist. Ephemeral by design — fresh every day.
+function CloseTheLoop({ toast }) {
+  const [done, setDone] = React.useState(() => CLOSE_THE_LOOP.map(() => false))
+  const allDone = done.every(Boolean)
+  const toggle = (i) => setDone((d) => d.map((x, idx) => (idx === i ? !x : x)))
+  return (
+    <div className="card p-5" style={{ borderColor: allDone ? 'var(--accent)' : 'var(--line)' }}>
+      <div className="eyebrow mb-3" style={{ color: 'var(--accent)' }}>Close the loop</div>
+      <div className="space-y-2.5">
+        {CLOSE_THE_LOOP.map((item, i) => (
+          <button key={item} onClick={() => toggle(i)} className="w-full flex items-center gap-3 text-left">
+            <span className="w-5 h-5 rounded-md grid place-items-center shrink-0 text-[12px] transition-colors"
+              style={{ border: '1px solid var(--line)', background: done[i] ? 'var(--accent)' : 'transparent', color: 'var(--accent-ink)' }}>
+              {done[i] ? '✓' : ''}
+            </span>
+            <span className="text-[14px]" style={{ color: done[i] ? 'var(--ink-faint)' : 'var(--ink)', textDecoration: done[i] ? 'line-through' : 'none' }}>{item}</span>
+          </button>
+        ))}
+      </div>
+      <button className="btn btn-primary w-full mt-4" disabled={!allDone}
+        style={!allDone ? { opacity: 0.5 } : {}}
+        onClick={() => toast?.('Day closed. Go recover.')}>
+        Call it. Go recover.
+      </button>
     </div>
   )
 }

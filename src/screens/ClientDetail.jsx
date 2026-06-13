@@ -3,6 +3,21 @@ import { Header, StatusPill, ProgressChart } from '../components/ui.jsx'
 import { ConsentBadge } from '../components/social.jsx'
 import { CONSENT_LEVELS, CONSENT_LABEL, SAFETY_LINE } from '../data/seed.js'
 import { fmtDay, fmtTime } from '../lib/store.js'
+import { FLOURISHES } from '../lib/voice.js'
+
+// Real World Notes — the stuff that actually decides how a session goes.
+const RW_FIELDS = [
+  ['parking', 'Parking'],
+  ['pets', 'Pets'],
+  ['gateCode', 'Gate code'],
+  ['flooring', 'Weird flooring'],
+  ['spaceLimits', 'Space limits'],
+  ['equipment', 'Equipment actually available'],
+  ['patterns', 'Excuses / patterns'],
+  ['motivates', 'What motivates them'],
+  ['dontSay', 'What not to say'],
+  ['tone', 'Best coaching tone'],
+]
 
 export default function ClientDetail({ state, update, go, params, toast }) {
   const c = state.clients.find((x) => x.id === params?.id) || state.clients[0]
@@ -25,6 +40,7 @@ export default function ClientDetail({ state, update, go, params, toast }) {
         <div className="card p-5" style={{ borderColor: 'var(--accent)' }}>
           <div className="eyebrow mb-1" style={{ color: 'var(--accent)' }}>Goal</div>
           <div className="display text-[20px] leading-tight">{c.goal}</div>
+          {c.milestone && <div className="eyebrow mt-2" style={{ color: 'var(--accent)' }}>★ Milestone: {c.milestone}</div>}
           <div className="grid grid-cols-3 gap-2 mt-4">
             <Stat label="Sessions" v={c.credits} sub="credits left" />
             <Stat label="Done" v={c.sessionsDone ?? '—'} sub="logged" />
@@ -56,6 +72,29 @@ export default function ClientDetail({ state, update, go, params, toast }) {
           <Field label="Payment" v={c.payment} danger={c.payment === 'unpaid'} />
           <Field label="Check-in" v={c.checkin} danger={c.checkin !== 'current'} />
         </div>
+
+        {/* No-BS client read + real world notes */}
+        {(c.clientRead || c.realWorld) && (
+          <div className="card p-4">
+            <div className="eyebrow mb-3">Real world notes</div>
+            {c.clientRead && (
+              <div className="rounded-xl p-3 mb-4" style={{ background: 'var(--surface-2)', border: '1px solid var(--accent-soft)' }}>
+                <div className="eyebrow mb-1" style={{ color: 'var(--accent)' }}>No-BS client read</div>
+                <p className="text-[14px] font-semibold" style={{ color: 'var(--ink)' }}>{c.clientRead}</p>
+              </div>
+            )}
+            {c.realWorld && (
+              <div className="space-y-3">
+                {RW_FIELDS.map(([k, label]) => {
+                  const val = c.realWorld[k]
+                  if (!val || val === '—') return null
+                  return <RWRow key={k} label={label} v={val} />
+                })}
+              </div>
+            )}
+            <p className="text-[11px] mt-4" style={{ color: 'var(--ink-faint)' }}>{FLOURISHES.excusesLogged}</p>
+          </div>
+        )}
 
         {/* notes */}
         <div className="card p-4">
@@ -116,6 +155,14 @@ function Stat({ label, v, sub }) {
       <div className="text-[9px] uppercase tracking-wider" style={{ color: 'var(--ink-faint)' }}>{label}</div>
       <div className="stat-num text-[18px]">{v}</div>
       <div className="text-[9px]" style={{ color: 'var(--ink-faint)' }}>{sub}</div>
+    </div>
+  )
+}
+function RWRow({ label, v }) {
+  return (
+    <div>
+      <div className="text-[10px] uppercase tracking-wider mb-0.5" style={{ color: 'var(--ink-faint)' }}>{label}</div>
+      <div className="text-[13px]" style={{ color: 'var(--ink)' }}>{v}</div>
     </div>
   )
 }

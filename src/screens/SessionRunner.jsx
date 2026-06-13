@@ -2,6 +2,7 @@ import React from 'react'
 import { Header, SessionBlock, ExerciseRow, Segmented } from '../components/ui.jsx'
 import { generateSession, substitutesFor } from '../lib/generator.js'
 import { uid } from '../lib/store.js'
+import { voice, FLOURISHES } from '../lib/voice.js'
 
 const TIMES = [20, 30, 45, 60]
 const SPACES = ['living room', 'garage', 'driveway', 'apartment gym', 'office', 'park']
@@ -71,7 +72,8 @@ export default function SessionRunner({ state, update, go, params, toast }) {
         c.id === client.id ? { ...c, credits: Math.max(0, c.credits - 1), lastNotes: notes || c.lastNotes, checkin: 'current' } : c
       ),
     }))
-    toast?.(makeIdea ? 'Session logged. Draft saved to Social Studio.' : 'Session logged. Credit used.')
+    const v = voice(state.settings?.jeanMode)
+    toast?.(makeIdea ? v.sessionLoggedDraft : v.sessionLogged)
     setSession(null)
     setNotes('')
     setContent([])
@@ -128,7 +130,7 @@ export default function SessionRunner({ state, update, go, params, toast }) {
               <button className="btn btn-primary w-full text-[16px]" onClick={generate}>⚡ Generate session</button>
             </div>
             <p className="text-[12px] text-center" style={{ color: 'var(--ink-faint)' }}>
-              Built from local preset logic. Pick a program template instead in Build.
+              {FLOURISHES.fitTheLife} Built from local preset logic — pick a program template instead in Build.
             </p>
           </>
         ) : (

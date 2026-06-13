@@ -35,7 +35,26 @@ const HOOKS = {
     'A day on the road: 6 homes, 6 different setups.',
     'How I build a session in 60 seconds at your door.',
   ],
+  // News-aware / real talk: grounded, culturally aware, never political.
+  // Real life, stress, aging, discipline, media noise, burnout, taking
+  // care of yourself in a chaotic world.
+  'real talk': [
+    'Your nervous system does not care about your perfect plan.',
+    'Most people are not lazy. They are overloaded.',
+    'Strength training is one way to stop feeling like the world is driving.',
+    'You do not need a lifestyle brand. You need a plan you will actually do.',
+    'A workout at home still counts. Especially when life is loud.',
+  ],
 }
+
+// Real-talk posts read as full lines, so they double as titles + hooks.
+const REAL_TALK_IDEAS = [
+  'Your nervous system does not care about your perfect plan.',
+  'Most people are not lazy. They are overloaded.',
+  'Strength training is one way to stop feeling like the world is driving.',
+  'You do not need a lifestyle brand. You need a plan you will actually do.',
+  'A workout at home still counts. Especially when life is loud.',
+]
 
 const IDEA_SHAPES = [
   '3 things you can do with {equip} and a {space}',
@@ -64,6 +83,7 @@ const HASHTAGS = {
   inspirational: ['#transformation', '#progressnotperfection', '#strongereveryday'],
   'myth-busting': ['#fitnessmyths', '#realtalk', '#trainsmart'],
   'behind-the-scenes': ['#dayinthelife', '#trainerlife', '#onlocation'],
+  'real talk': ['#realtalk', '#sustainablefitness', '#showupforyourself'],
 }
 
 const fill = (tpl, vars) =>
@@ -83,6 +103,19 @@ const sample = (arr, n) => {
 // ---- Content Idea Generator ----
 export function generateIdeas({ clientType = 'any', space = 'living room', equip = 'one dumbbell', goal = 'Fat loss', tone = 'educational', count = 4 } = {}) {
   const hooks = HOOKS[tone] || HOOKS.educational
+  // Real talk posts are written as whole lines, not fill-in-the-blank shapes.
+  if (tone === 'real talk') {
+    return sample(REAL_TALK_IDEAS, count).map((line) => ({
+      id: uid('idea'),
+      title: line,
+      tone,
+      hook: line,
+      day: '',
+      status: 'idea',
+      createdAt: new Date().toISOString(),
+      meta: { clientType, space, equip, goal },
+    }))
+  }
   const shapes = sample(IDEA_SHAPES, count)
   return shapes.map((shape, i) => ({
     id: uid('idea'),

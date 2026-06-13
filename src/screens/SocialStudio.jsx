@@ -4,6 +4,7 @@ import { TikTokProfileCard, VideoCard, SocialPostCard, CaptionBuilder, ShotListB
 import { generateIdeas, buildCaption, buildShotList, buildStory } from '../lib/social.js'
 import { TIKTOK, TONES, consentAllows, CONSENT_LABEL } from '../data/seed.js'
 import { uid } from '../lib/store.js'
+import { voice, FLOURISHES } from '../lib/voice.js'
 
 const TABS = ['Profile', 'Ideas', 'Captions', 'Stories', 'Shots', 'Library', 'Roadmap']
 
@@ -81,8 +82,13 @@ function IdeasTab({ state, update, toast, go }) {
     update((s) => ({ ...s, contentIdeas: [{ ...idea }, ...s.contentIdeas] }))
     toast?.('Saved to library')
   }
+  const v = voice(state.settings?.jeanMode)
   return (
     <>
+      <div className="flex items-center justify-between">
+        <div className="eyebrow">{v.contentIdeas}</div>
+        <span className="text-[11px]" style={{ color: 'var(--ink-faint)' }}>{FLOURISHES.perfectLighting}</span>
+      </div>
       <div className="card p-4 space-y-3">
         <Picker label="Space" value={cfg.space} opts={['living room', 'garage', 'driveway', 'apartment gym', 'office', 'park']} on={(v) => set('space', v)} />
         <Picker label="Equipment" value={cfg.equip} opts={['one dumbbell', 'bands', 'kettlebell', 'bodyweight', 'a bench']} on={(v) => set('equip', v)} />
@@ -92,6 +98,11 @@ function IdeasTab({ state, update, toast, go }) {
           <div className="flex flex-wrap gap-2">
             {TONES.map((t) => <button key={t} className="chip py-2" data-on={cfg.tone === t} onClick={() => set('tone', t)}>{t}</button>)}
           </div>
+          {cfg.tone === 'real talk' && (
+            <p className="text-[11px] mt-2" style={{ color: 'var(--ink-faint)' }}>
+              News-aware, grounded posts about real life — stress, aging, discipline, burnout, taking care of yourself in a chaotic world. Never political.
+            </p>
+          )}
         </div>
         <button className="btn btn-primary w-full" onClick={gen}>⚡ Generate ideas</button>
       </div>

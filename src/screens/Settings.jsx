@@ -25,6 +25,12 @@ export default function Settings({ state, update, reset, go, toast }) {
     e.target.value = ''
   }
 
+  const jeanMode = !!state.settings?.jeanMode
+  function toggleJean() {
+    update((s) => ({ ...s, settings: { ...(s.settings || {}), jeanMode: !s.settings?.jeanMode } }))
+    toast?.(jeanMode ? 'Jean Mode off.' : 'Jean Mode on. No filler.')
+  }
+
   const totalCredits = state.clients.reduce((s, c) => s + c.credits, 0)
   const completed = (state.completedSessions || []).length
 
@@ -37,6 +43,22 @@ export default function Settings({ state, update, reset, go, toast }) {
           <div className="text-[13px] mt-1" style={{ color: 'var(--ink-dim)' }}>{TRAINER.email} · {TRAINER.phone}</div>
           <div className="eyebrow mt-3">{TRAINER.service_area}</div>
         </div>
+
+        {/* Jean Mode — personality toggle */}
+        <button onClick={toggleJean} className="card p-4 w-full text-left flex items-center justify-between gap-3"
+          style={jeanMode ? { borderColor: 'var(--accent)' } : {}}>
+          <div className="min-w-0">
+            <div className="display text-[16px]">Jean Mode</div>
+            <p className="text-[12px] mt-1" style={{ color: 'var(--ink-dim)' }}>
+              {jeanMode ? 'Copy talks like Jean. Direct, sharp, no filler.' : 'Flip the interface into Jean’s voice — more direct, more personality.'}
+            </p>
+          </div>
+          <span className="shrink-0 w-12 h-7 rounded-full relative transition-colors"
+            style={{ background: jeanMode ? 'var(--accent)' : 'var(--surface-3)', border: '1px solid var(--line)' }}>
+            <span className="absolute top-0.5 w-5 h-5 rounded-full transition-all"
+              style={{ left: jeanMode ? '26px' : '3px', background: jeanMode ? 'var(--accent-ink)' : 'var(--ink-faint)' }} />
+          </span>
+        </button>
 
         <div className="grid grid-cols-3 gap-3">
           <StatCard label="Clients" value={state.clients.length} />
