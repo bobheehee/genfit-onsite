@@ -1,18 +1,18 @@
 // ---------------------------------------------------------------
-// GenFit Fieldhouse — seeded mock data. No backend. Demo only.
+// GenFit OnSite — seeded mock data. No backend. Demo only.
 // ---------------------------------------------------------------
 
 export const TRAINER = {
-  name: 'Jean Mercer',
-  brand: 'GenFit Fieldhouse',
+  name: 'Jean Allen',
+  brand: 'GenFit OnSite',
   tagline: 'Training where life actually happens.',
   phone: '(555) 014-7782',
-  email: 'jean@genfitfieldhouse.com',
+  email: 'Add Jean’s email',
   service_area: 'East Metro + 20 mi',
 }
 
 export const packages = [
-  { id: 'pkg_starter', name: 'Field Starter', sessions: 8, price: 600, per: 75, blurb: '8 in-home sessions. Foundation + form.' },
+  { id: 'pkg_starter', name: 'Starter 8', sessions: 8, price: 600, per: 75, blurb: '8 in-home sessions. Foundation + form.' },
   { id: 'pkg_build', name: 'Build Block', sessions: 12, price: 840, per: 70, blurb: '12 sessions. Real strength progression.' },
   { id: 'pkg_pro', name: 'Pro Standing', sessions: 16, price: 1040, per: 65, blurb: '16 sessions + priority scheduling.' },
 ]
@@ -136,8 +136,8 @@ export const clients = [
 ]
 
 export const invoices = [
-  { id: 'inv_1', clientId: 'cl_dev', amount: 600, status: 'unpaid', due: iso(-2), label: 'Field Starter renewal' },
-  { id: 'inv_2', clientId: 'cl_tom', amount: 600, status: 'unpaid', due: iso(1), label: 'Field Starter renewal' },
+  { id: 'inv_1', clientId: 'cl_dev', amount: 600, status: 'unpaid', due: iso(-2), label: 'Starter 8 renewal' },
+  { id: 'inv_2', clientId: 'cl_tom', amount: 600, status: 'unpaid', due: iso(1), label: 'Starter 8 renewal' },
   { id: 'inv_3', clientId: 'cl_maya', amount: 840, status: 'paid', due: iso(-10), label: 'Build Block' },
   { id: 'inv_4', clientId: 'cl_priya', amount: 1040, status: 'paid', due: iso(-5), label: 'Pro Standing' },
 ]
@@ -279,10 +279,10 @@ export const WEEK_THEMES = {
   Sunday: 'Reset / planning',
 }
 
-export const TIKTOK = { handle: '@jeanfieldhouse', url: 'https://www.tiktok.com/@jeanfieldhouse' }
+export const TIKTOK = { handle: '@jeanonsite', url: 'https://www.tiktok.com/@jeanonsite' }
 export const SOCIAL_LINKS = {
-  tiktok: 'https://www.tiktok.com/@jeanfieldhouse',
-  instagram: 'https://www.instagram.com/jeanfieldhouse',
-  facebook: 'https://www.facebook.com/jeanfieldhouse',
-  youtube: 'https://www.youtube.com/@jeanfieldhouse',
+  tiktok: 'https://www.tiktok.com/@jeanonsite',
+  instagram: 'https://www.instagram.com/jeanonsite',
+  facebook: 'https://www.facebook.com/jeanonsite',
+  youtube: 'https://www.youtube.com/@jeanonsite',
 }

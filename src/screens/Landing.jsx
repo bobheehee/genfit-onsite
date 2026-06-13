@@ -23,7 +23,7 @@ export default function Landing({ go }) {
     <div className="animate-in">
       {/* top bar */}
       <div className="flex items-center justify-between px-5 pt-5">
-        <span className="display text-[16px] tracking-tight">GENFIT<span style={{ color: 'var(--accent)' }}>.</span>FIELDHOUSE</span>
+        <span className="display text-[16px] tracking-tight">GENFIT<span style={{ color: 'var(--accent)' }}>.</span>ONSITE</span>
         <button className="btn btn-line py-2 px-3 text-[12px]" onClick={() => go('dashboard')}>Trainer login</button>
       </div>
 

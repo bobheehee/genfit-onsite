@@ -1,4 +1,4 @@
-# GenFit Fieldhouse
+# GenFit OnSite
 
 Mobile-first field operating system for an independent in-home personal trainer (Jean).
 React + Vite + Tailwind. All data persists locally via localStorage. No backend, no auth,
