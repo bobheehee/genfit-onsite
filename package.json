@@ -1,9 +1,9 @@
 {
-  "name": "genfit-fieldhouse",
+  "name": "genfit-onsite",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "GenFit Fieldhouse - field operating system for an in-home personal trainer",
+  "description": "GenFit OnSite - in-home personal training app for Jean (train where life actually happens)",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
