@@ -57,7 +57,7 @@ const CTAS = [
 ]
 
 const HASHTAGS = {
-  base: ['#inhometraining', '#personaltrainer', '#genfitonsite', '#trainingwherelifehappens'],
+  base: ['#inhometraining', '#personaltrainer', '#onsitetraining', '#trainingwherelifehappens'],
   funny: ['#gymtok', '#fitnesshumor', '#noexcuses'],
   'tough love': ['#disciplineovermotivation', '#showup', '#consistency'],
   educational: ['#formtips', '#trainsmart', '#movementtips'],

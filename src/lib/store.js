@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { seed } from '../data/seed.js'
 
-const KEY = 'genfit_onsite_v2'
+const KEY = 'genfit_onsite_v1'
 
 export function loadState() {
   try {
