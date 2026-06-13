@@ -3,6 +3,42 @@ import { Header, StatCard } from '../components/ui.jsx'
 import { exportJSON, importJSON } from '../lib/store.js'
 import { TRAINER, SAFETY_LINE } from '../data/seed.js'
 
+// Add-to-Home-Screen helper. Shows a native install button on Android/Chrome
+// when offered, and always shows the iOS Safari instructions.
+function InstallCard() {
+  const [deferred, setDeferred] = React.useState(null)
+  React.useEffect(() => {
+    const onPrompt = (e) => { e.preventDefault(); setDeferred(e) }
+    const onInstalled = () => setDeferred(null)
+    window.addEventListener('beforeinstallprompt', onPrompt)
+    window.addEventListener('appinstalled', onInstalled)
+    return () => {
+      window.removeEventListener('beforeinstallprompt', onPrompt)
+      window.removeEventListener('appinstalled', onInstalled)
+    }
+  }, [])
+  const install = async () => {
+    if (!deferred) return
+    deferred.prompt()
+    await deferred.userChoice
+    setDeferred(null)
+  }
+  return (
+    <div className="card p-4">
+      <div className="eyebrow mb-2">Install app</div>
+      {deferred && (
+        <button className="btn btn-primary w-full text-[13px] mb-3" onClick={install}>↓ Install GenFit OnSite</button>
+      )}
+      <p className="text-[12px] leading-relaxed" style={{ color: 'var(--ink-dim)' }}>
+        <span style={{ color: 'var(--accent)' }}>iPhone:</span> open this site in Safari, tap Share, then Add to Home Screen.
+      </p>
+      <p className="text-[12px] leading-relaxed mt-2" style={{ color: 'var(--ink-dim)' }}>
+        <span style={{ color: 'var(--accent)' }}>Android / Chrome:</span> tap Install App if prompted, or use browser menu → Add to Home Screen.
+      </p>
+    </div>
+  )
+}
+
 export default function Settings({ state, update, reset, go, toast }) {
   const fileRef = React.useRef(null)
 
@@ -101,6 +137,9 @@ export default function Settings({ state, update, reset, go, toast }) {
             Every color is a CSS variable, so reskinning is one swap. Pick a vibe and the whole app follows.
           </p>
         </div>
+
+        {/* install / add to home screen */}
+        <InstallCard />
 
         {/* hub: jump to every screen */}
         <div className="card p-2">
